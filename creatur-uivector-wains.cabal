@@ -1,5 +1,5 @@
 name:                creatur-uivector-wains
-version:             1.0.0
+version:             1.0.1
 synopsis:            Simple vector library for use with creatur-wains.
 description:         Simple vector library for use with creatur-wains.
                      Vectors can be genetically encoded and decoded,

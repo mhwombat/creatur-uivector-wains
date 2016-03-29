@@ -11,6 +11,8 @@
 -- records.
 --
 ------------------------------------------------------------------------
+{-# LANGUAGE DeriveAnyClass #-}
+{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE Rank2Types #-}
 module ALife.Creatur.Wain.UIVector.Object
   (
@@ -31,10 +33,12 @@ import ALife.Creatur.Wain.UIVector.Pattern (Pattern)
 import ALife.Creatur.Wain.UIVector.Tweaker (PatternTweaker(..))
 import ALife.Creatur.Wain.UnitInterval (UIDouble)
 import Control.Lens
+import GHC.Generics (Generic)
+import Data.Serialize
 
 data Object a = PObject Pattern String
               | AObject (W.Wain Pattern PatternTweaker a)
-              deriving (Eq, Show)
+              deriving (Eq, Show, Generic, Serialize)
 
 isPattern :: Object a -> Bool
 isPattern (PObject _ _) = True
