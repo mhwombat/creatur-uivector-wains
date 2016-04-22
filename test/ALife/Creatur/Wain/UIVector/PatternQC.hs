@@ -34,8 +34,8 @@ instance Arbitrary UIDouble where
 sizedArbPattern :: Int -> Gen Pattern
 sizedArbPattern n = vectorOf n arbitrary
 
-instance Arbitrary Pattern where
-  arbitrary = sized sizedArbPattern
+-- instance Arbitrary Pattern where
+--   arbitrary = sized sizedArbPattern
 
 sizedArbWeights :: Int -> Gen Weights
 sizedArbWeights n = fmap makeWeights $ vectorOf n arbitrary
