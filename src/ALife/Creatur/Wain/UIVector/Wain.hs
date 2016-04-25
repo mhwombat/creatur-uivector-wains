@@ -17,8 +17,8 @@ module ALife.Creatur.Wain.UIVector.Wain
     describeClassifierModels,
     describePredictorModels,
     adjustEnergy,
-    metabCost
-    -- packageVersion
+    metabCost,
+    packageVersion
   ) where
 
 import ALife.Creatur (agentId)
@@ -31,13 +31,13 @@ import ALife.Creatur.Wain.UnitInterval (UIDouble, uiToDouble)
 import Control.Lens hiding (universe)
 import Control.Monad.State.Lazy (StateT)
 import qualified Data.Map.Strict as M
--- import Data.Version (showVersion)
--- import Paths_creatur_vector_wains (version)
+import Data.Version (showVersion)
+import Paths_creatur_uivector_wains (version)
 import Text.Printf (printf)
 
--- -- | Returns the current version number of this library.
--- packageVersion :: String
--- packageVersion = "creatur-vector-wains-" ++ showVersion version
+-- | Returns the current version number of this library.
+packageVersion :: String
+packageVersion = "creatur-uivector-vector-wains-" ++ showVersion version
 
 type PatternWain a = W.Wain [UIDouble] PatternTweaker a
 
