@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------
 -- |
 -- Module      :  ALife.Creatur.Wain.UIVector.ExamineAgent
--- Copyright   :  (c) Amy de Buitléir 2013-2015
+-- Copyright   :  (c) Amy de Buitléir 2013-2016
 -- License     :  BSD-style
 -- Maintainer  :  amy@nualeargais.ie
 -- Stability   :  experimental
@@ -15,11 +15,10 @@ module ALife.Creatur.Wain.UIVector.ExamineAgent where
 
 import ALife.Creatur.Wain
 import ALife.Creatur.Wain.Brain
-import ALife.Creatur.Wain.GeneticSOM hiding (Pattern)
-import ALife.Creatur.Wain.UIVector.Pattern
-import ALife.Creatur.Wain.UIVector.Tweaker
-import ALife.Creatur.Wain.UnitInterval
+import ALife.Creatur.Wain.GeneticSOM
+import ALife.Creatur.Wain.Response (Response)
 import ALife.Creatur.Wain.UIVector.Wain
+import ALife.Creatur.Wain.UnitInterval
 import Control.Lens
 import qualified Data.ByteString as BS
 import qualified Data.Serialize as DS
@@ -29,8 +28,9 @@ import System.Posix.Files (getFileStatus)
 import Text.Printf (printf)
 
 fetchWains
-  :: (DS.Serialize a, Ord a)
-    => FilePath -> IO [Wain Pattern PatternTweaker a]
+  :: (DS.Serialize a, DS.Serialize rt, Ord a, Tweaker rt,
+    Response a ~ Pattern rt)
+      => FilePath -> IO [PatternWain a rt]
 fetchWains f = do
   dir <- isDirectory <$> getFileStatus f
   if dir
@@ -40,21 +40,23 @@ fetchWains f = do
       return [w]
 
 fetchAllWains
-  :: (DS.Serialize a, Ord a)
-    => FilePath -> IO [Wain Pattern PatternTweaker a]
+  :: (DS.Serialize a, DS.Serialize rt, Ord a, Tweaker rt,
+    Response a ~ Pattern rt)
+      => FilePath -> IO [PatternWain a rt]
 fetchAllWains f = do
   fs <- drop 2 <$> getDirectoryContents f
   mapM fetchWain fs
 
 fetchWain
-  :: (DS.Serialize a, Ord a)
-    => FilePath -> IO (Wain Pattern PatternTweaker a)
+  :: (DS.Serialize a, DS.Serialize rt, Ord a, Tweaker rt,
+    Response a ~ Pattern rt)
+      => FilePath -> IO (PatternWain a rt)
 fetchWain f = do
   x <- BS.readFile f
   let (Right w) = DS.decode x
   return w
 
-examine :: Show a => Wain Pattern PatternTweaker a -> IO ()
+examine :: Show a => PatternWain a rt -> IO ()
 examine a = do
   putStrLn $ "name: " ++ show (view name a)
   -- appearance
