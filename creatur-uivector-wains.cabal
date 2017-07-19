@@ -1,22 +1,24 @@
 name:                creatur-uivector-wains
-version:             1.2.0
+version:             1.2.1
 synopsis:            Simple vector library for use with creatur-wains.
 description:         Simple vector library for use with creatur-wains.
                      Vectors can be genetically encoded and decoded,
                      making them suitable to represent the appearance
                      of a wain.
-homepage:            https://github.com/mhwombat/creatur-uivector-wains
+homepage:            https://github.com/mhwombat/creatur-uivector-wains#readme
+bug-reports:         https://github.com/mhwombat/creatur-uivector-wains/issues
 license:             BSD3
 license-file:        LICENSE
 author:              Amy de Buitléir
 maintainer:          amy@nualeargais.ie
-copyright:           (c) Amy de Buitléir 2012-2016
-category:            Data
+copyright:           (c) 2012-2017 Amy de Buitléir
+category:            AI
 build-type:          Simple
 extra-source-files:  ChangeLog.md
 cabal-version:       >=1.10
 
 library
+  hs-source-dirs:      src
   exposed-modules:     ALife.Creatur.Wain.UIVector.ExamineAgent,
                        ALife.Creatur.Wain.UIVector.Pattern,
                        ALife.Creatur.Wain.UIVector.PatternDB,
@@ -24,49 +26,50 @@ library
                        ALife.Creatur.Wain.UIVector.Wain,
                        ALife.Creatur.Wain.UIVector.Util,
                        ALife.Creatur.Wain.UIVector.Object
-  ghc-options:         -Wall -fno-warn-orphans
   other-modules:       Paths_creatur_uivector_wains
-  build-depends:       base >=4.8 && <4.9,
-                       base64-bytestring ==1.0.*,
-                       bytestring ==0.10.*,
-                       cereal ==0.5.*,
-                       containers ==0.5.*,
-                       creatur ==5.9.*,
-                       creatur-wains ==8.7.*,
-                       directory ==1.2.*,
-                       filepath ==1.4.*,
-                       lens ==4.13.*,
-                       MonadRandom ==0.4.*,
-                       mtl ==2.2.*,
-                       random ==1.1.*,
-                       som ==9.0.*,
-                       split ==0.2.*,
-                       transformers ==0.5.*,
-                       unix == 2.7.*,
-                       utf8-string ==1.*,
-                       vector ==0.11.*
-  hs-source-dirs:      src
+  ghc-options:         -Wall
+  build-depends:       base,
+                       base64-bytestring,
+                       bytestring,
+                       cereal,
+                       containers,
+                       creatur,
+                       creatur-wains,
+                       directory,
+                       filepath,
+                       lens,
+                       MonadRandom,
+                       mtl,
+                       random,
+                       som,
+                       split,
+                       transformers,
+                       unix,
+                       utf8-string,
+                       vector
   default-language:    Haskell2010
 
-Test-suite wain-tests
+test-suite wain-tests
   type:                exitcode-stdio-1.0
   main-is:             Main.hs
   ghc-options:         -Wall -fno-warn-orphans
   hs-source-dirs:      test, src
-  build-depends:       base >=4.8 && <4.9,
-                       base64-bytestring ==1.0.*,
-                       bytestring ==0.10.*,
-                       cereal ==0.5.*,
-                       creatur ==5.9.*,
-                       creatur-wains ==8.7.*,
-                       creatur-wains-test-utils ==1.0.*,
+  build-depends:       base,
+                       base64-bytestring,
+                       bytestring,
+                       cereal,
+                       creatur,
+                       creatur-wains,
+                       creatur-wains-test-utils,
                        creatur-uivector-wains,
-                       MonadRandom ==0.4.*,
-                       QuickCheck ==2.8.*,
-                       som ==9.0.*,
-                       split ==0.2.*,
-                       test-framework ==0.8.*,
-                       test-framework-hunit ==0.3.*,
-                       test-framework-quickcheck2 ==0.3.*,
-                       utf8-string ==1.*,
-                       vector ==0.11.*
+                       MonadRandom,
+                       QuickCheck,
+                       som,
+                       split,
+                       test-framework,
+                       test-framework-hunit,
+                       test-framework-quickcheck2,
+                       utf8-string,
+                       vector
+  other-modules:       ALife.Creatur.Wain.UIVector.Pattern
+                       ALife.Creatur.Wain.UIVector.PatternQC

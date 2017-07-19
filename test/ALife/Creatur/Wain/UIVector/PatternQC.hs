@@ -21,15 +21,13 @@ import ALife.Creatur.Wain.Weights (Weights, makeWeights)
 import ALife.Creatur.Wain.UIVector.Pattern
 import ALife.Creatur.Wain.TestUtils (prop_serialize_round_trippable,
   prop_genetic_round_trippable, prop_diploid_identity)
-import ALife.Creatur.Wain.UnitInterval (UIDouble, doubleToUI,
-  uiVectorDiff)
-import ALife.Creatur.Wain.Util (unitInterval)
+import ALife.Creatur.Wain.UnitInterval (UIDouble, uiVectorDiff)
 import Test.Framework (Test, testGroup)
 import Test.Framework.Providers.QuickCheck2 (testProperty)
 import Test.QuickCheck
 
-instance Arbitrary UIDouble where
-  arbitrary = doubleToUI <$> choose unitInterval
+-- instance Arbitrary UIDouble where
+--   arbitrary = doubleToUI <$> choose unitInterval
 
 sizedArbPattern :: Int -> Gen Pattern
 sizedArbPattern n = vectorOf n arbitrary

@@ -27,6 +27,7 @@ import ALife.Creatur.Wain.Brain (classifier, predictor)
 import ALife.Creatur.Wain.GeneticSOM (modelMap, numModels)
 import ALife.Creatur.Wain.UIVector.Pattern (Pattern)
 import ALife.Creatur.Wain.Pretty (pretty)
+import ALife.Creatur.Wain.SimpleMuser (SimpleMuser)
 import ALife.Creatur.Wain.UIVector.Tweaker (PatternTweaker(..))
 import ALife.Creatur.Wain.UnitInterval (uiToDouble)
 import Control.Lens hiding (universe)
@@ -40,7 +41,7 @@ import Text.Printf (printf)
 packageVersion :: String
 packageVersion = "creatur-uivector-vector-wains-" ++ showVersion version
 
-type PatternWain a rt = W.Wain Pattern PatternTweaker rt a
+type PatternWain a rt = W.Wain Pattern PatternTweaker rt SimpleMuser a
 
 describeClassifierModels :: PatternWain a rt -> [String]
 describeClassifierModels w = map f ms
