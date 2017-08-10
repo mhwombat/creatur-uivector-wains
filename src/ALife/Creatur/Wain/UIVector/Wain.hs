@@ -41,7 +41,8 @@ import Text.Printf (printf)
 packageVersion :: String
 packageVersion = "creatur-uivector-vector-wains-" ++ showVersion version
 
-type PatternWain a rt = W.Wain Pattern PatternTweaker rt SimpleMuser a
+type PatternWain a rt
+  = W.Wain Pattern PatternTweaker rt (SimpleMuser a) a
 
 describeClassifierModels :: PatternWain a rt -> [String]
 describeClassifierModels w = map f ms
