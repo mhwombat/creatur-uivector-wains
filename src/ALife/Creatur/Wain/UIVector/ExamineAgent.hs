@@ -64,9 +64,11 @@ examine a = do
   putStrLn $ "devotion: " ++ printf "%5.3f" (uiToDouble $ view devotion a)
   putStrLn $ "ageOfMaturity: " ++ show (view ageOfMaturity a)
   putStrLn $ "passionDelta: " ++ show (view passionDelta a)
+  putStrLn $ "boredomDelta: " ++ show (view boredomDelta a)
   putStrLn $ "energy: " ++ printf "%5.3f" (uiToDouble $ view energy a)
   putStrLn $ "passion: " ++ printf "%5.3f" (uiToDouble $ view passion a)
   putStrLn $ "age: " ++ show (view age a)
+  -- litter
   putStrLn $ "total # children borne: "
     ++ show (view childrenBorneLifetime a)
   putStrLn $ "total # children weaned: "
@@ -75,10 +77,12 @@ examine a = do
   putStrLn $ "classifier SQ: " ++ show (schemaQuality . view classifier . view brain $ a)
   putStrLn $ "predictor SQ: " ++ show (schemaQuality . view predictor . view brain $ a)
   putStrLn $ "DSQ: " ++ show (decisionQuality . view brain $ a)
+  putStrLn $ "Max. number of classifier models: " ++ show (maxSize . view classifier . view brain $ a)
   putStrLn $ "Number of classifier models: " ++ show (numModels . view classifier . view brain $ a)
   putStrLn $ "Classifier learning function " ++ show (view learningParams . view classifier . view brain $ a)
   putStrLn $ "Classifier counts: " ++ show (counterMap . view classifier . view brain $ a)
   mapM_ putStrLn $ describeClassifierModels a
+  putStrLn $ "Max. number of predictor models: " ++ show (maxSize . view predictor . view brain $ a)
   putStrLn $ "Number of predictor models: " ++ show (numModels . view predictor . view brain $ a)
   putStrLn $ "Predictor learning function " ++ show (view learningParams . view predictor . view brain $ a)
   putStrLn $ "Predictor counts: " ++ show (counterMap . view predictor . view brain $ a)
