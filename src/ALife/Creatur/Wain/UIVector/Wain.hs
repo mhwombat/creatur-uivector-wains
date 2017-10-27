@@ -14,8 +14,6 @@
 module ALife.Creatur.Wain.UIVector.Wain
   (
     PatternWain,
-    describeClassifierModels,
-    describePredictorModels,
     adjustEnergy,
     metabCost,
     packageVersion
@@ -23,16 +21,14 @@ module ALife.Creatur.Wain.UIVector.Wain
 
 import ALife.Creatur (agentId)
 import qualified ALife.Creatur.Wain as W
-import ALife.Creatur.Wain.Brain (classifier, predictor)
-import ALife.Creatur.Wain.GeneticSOM (modelMap, numModels)
+import ALife.Creatur.Wain.Brain (classifier)
+import ALife.Creatur.Wain.GeneticSOM (numModels)
 import ALife.Creatur.Wain.UIVector.Pattern (Pattern)
-import ALife.Creatur.Wain.Pretty (pretty)
 import ALife.Creatur.Wain.SimpleMuser (SimpleMuser)
 import ALife.Creatur.Wain.UIVector.Tweaker (PatternTweaker(..))
 import ALife.Creatur.Wain.UnitInterval (uiToDouble)
 import Control.Lens hiding (universe)
 import Control.Monad.State.Lazy (StateT)
-import qualified Data.Map.Strict as M
 import Data.Version (showVersion)
 import Paths_creatur_uivector_wains (version)
 import Text.Printf (printf)
@@ -43,18 +39,6 @@ packageVersion = "creatur-uivector-vector-wains-" ++ showVersion version
 
 type PatternWain a rt
   = W.Wain Pattern PatternTweaker rt (SimpleMuser a) a
-
-describeClassifierModels :: PatternWain a rt -> [String]
-describeClassifierModels w = map f ms
-  where ms = M.toList . modelMap . view (W.brain . classifier) $ w
-        f (l, r) = agentId w ++ "'s classifier model "
-                     ++ show l ++ " " ++ show r
-
-describePredictorModels :: Show a => PatternWain a rt -> [String]
-describePredictorModels w = map f ms
-  where ms = M.toList . modelMap . view (W.brain . predictor) $ w
-        f (l, r) = agentId w ++ "'s predictor model "
-                     ++ show l ++ ": " ++ pretty r
 
 adjustEnergy
   :: Simple Lens e (PatternWain a rt) -> Double
