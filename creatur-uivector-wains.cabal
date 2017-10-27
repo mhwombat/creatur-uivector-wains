@@ -1,5 +1,5 @@
 name:                creatur-uivector-wains
-version:             1.2.4
+version:             1.2.5
 synopsis:            Simple vector library for use with creatur-wains.
 description:         Simple vector library for use with creatur-wains.
                      Vectors can be genetically encoded and decoded,
@@ -19,8 +19,7 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     ALife.Creatur.Wain.UIVector.ExamineAgent,
-                       ALife.Creatur.Wain.UIVector.Pattern,
+  exposed-modules:     ALife.Creatur.Wain.UIVector.Pattern,
                        ALife.Creatur.Wain.UIVector.PatternDB,
                        ALife.Creatur.Wain.UIVector.Tweaker,
                        ALife.Creatur.Wain.UIVector.Wain,
