@@ -21,8 +21,9 @@ module ALife.Creatur.Wain.UIVector.Tweaker
 import qualified ALife.Creatur.Genetics.BRGCWord8 as W8
 import ALife.Creatur.Genetics.Diploid (Diploid)
 import ALife.Creatur.Wain.GeneticSOM (Tweaker(..))
-import  ALife.Creatur.Wain.Pretty (Pretty)
 import qualified ALife.Creatur.Wain.UIVector.Pattern as P
+import  ALife.Creatur.Wain.Pretty (Pretty)
+import  ALife.Creatur.Wain.Statistics (Statistical(..), prefix)
 import ALife.Creatur.Wain.Weights (Weights)
 
 import Data.Serialize (Serialize)
@@ -39,3 +40,6 @@ instance Tweaker PatternTweaker where
 instance Serialize PatternTweaker
 instance W8.Genetic PatternTweaker
 instance Diploid PatternTweaker
+
+instance Statistical PatternTweaker where
+  stats (PatternTweaker ws) = map (prefix "patternTweakerWeights") . stats $ ws

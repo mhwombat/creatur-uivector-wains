@@ -10,6 +10,8 @@
 -- Utilities for working with patterns.
 --
 ------------------------------------------------------------------------
+{-# LANGUAGE FlexibleInstances #-}
+{-# OPTIONS_GHC -fno-warn-orphans #-}
 module ALife.Creatur.Wain.UIVector.Pattern
   (
     Pattern,
@@ -17,6 +19,9 @@ module ALife.Creatur.Wain.UIVector.Pattern
     makeSimilar
   ) where
 
+import  ALife.Creatur.Wain (Label)
+import  ALife.Creatur.Wain.Statistics (Statistical(..), prefix,
+  dStats)
 import ALife.Creatur.Wain.UnitInterval (UIDouble, adjustUIVector)
 import ALife.Creatur.Wain.Weights (Weights, weightedUIVectorDiff)
 
@@ -27,3 +32,11 @@ diff = weightedUIVectorDiff
 
 makeSimilar :: Pattern -> UIDouble -> Pattern -> Pattern
 makeSimilar = adjustUIVector
+
+instance Statistical Pattern where
+  stats = dStats ""
+
+instance Statistical [(Label, Pattern)] where
+  stats = concatMap f
+    where f (k, v) = map (prefix (g k)) . stats $ v
+          g k = "[" ++ show k ++ "]"
