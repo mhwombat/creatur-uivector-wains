@@ -19,9 +19,7 @@ module ALife.Creatur.Wain.UIVector.Pattern
     makeSimilar
   ) where
 
-import  ALife.Creatur.Wain (Label)
-import  ALife.Creatur.Wain.Statistics (Statistical(..), prefix,
-  dStats)
+import  ALife.Creatur.Wain.Statistics (Statistical(..), dStats)
 import ALife.Creatur.Wain.UnitInterval (UIDouble, adjustUIVector)
 import ALife.Creatur.Wain.Weights (Weights, weightedUIVectorDiff)
 
@@ -35,8 +33,3 @@ makeSimilar = adjustUIVector
 
 instance Statistical Pattern where
   stats = dStats ""
-
-instance Statistical [(Label, Pattern)] where
-  stats = concatMap f
-    where f (k, v) = map (prefix (g k)) . stats $ v
-          g k = "[" ++ show k ++ "]"
