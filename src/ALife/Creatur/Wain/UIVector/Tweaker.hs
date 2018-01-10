@@ -42,4 +42,4 @@ instance W8.Genetic PatternTweaker
 instance Diploid PatternTweaker
 
 instance Statistical PatternTweaker where
-  stats (PatternTweaker ws) = map (prefix "patternTweakerWeights") . stats $ ws
+  stats (PatternTweaker ws) = map (prefix "pattern tweaker weights") . stats $ ws
