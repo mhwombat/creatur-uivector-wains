@@ -18,7 +18,7 @@ module ALife.Creatur.Wain.UIVector.PatternQC
     test
   ) where
 
-import ALife.Creatur.Wain.Weights (Weights, makeWeights)
+import ALife.Creatur.Wain.Weights (Weights)
 import ALife.Creatur.Wain.UIVector.Pattern
 import ALife.Creatur.Wain.TestUtils (prop_serialize_round_trippable,
   prop_genetic_round_trippable, prop_diploid_identity)
@@ -35,12 +35,6 @@ sizedArbPattern n = vectorOf n arbitrary
 
 -- instance Arbitrary Pattern where
 --   arbitrary = sized sizedArbPattern
-
-sizedArbWeights :: Int -> Gen Weights
-sizedArbWeights n = fmap makeWeights $ vectorOf n arbitrary
-
-instance Arbitrary Weights where
-  arbitrary = sized sizedArbWeights
 
 prop_diff_can_be_0 :: Weights -> Pattern -> Property
 prop_diff_can_be_0 ws xs = property $ diff ws xs xs == 0
