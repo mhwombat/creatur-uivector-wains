@@ -50,6 +50,7 @@ packages:
 #     git: git@github.com:mhwombat/creatur-wains-test-utils.git
 #     commit: master
 #   extra-dep: true
+- ../som
 # Dependency packages to be pulled from upstream that are not in the resolver
 # using the same syntax as the packages field.
 # (e.g., acme-missiles-0.3)
@@ -57,7 +58,7 @@ extra-deps:
 - assert-0.0.1.2
 - gray-extended-1.5.2
 - grid-7.8.9
-- som-9.0.4
+- numeric-tools-0.2.0.1
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

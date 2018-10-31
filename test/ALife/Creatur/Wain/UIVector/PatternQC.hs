@@ -12,6 +12,7 @@
 ------------------------------------------------------------------------
 {-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE FlexibleInstances #-}
+{-# OPTIONS_GHC -fno-warn-orphans #-}
 module ALife.Creatur.Wain.UIVector.PatternQC
   (
     test
@@ -52,31 +53,31 @@ prop_diff_symmetric :: Weights -> Pattern -> Pattern -> Property
 prop_diff_symmetric ws xs ys = property $
   diff ws xs ys == diff ws ys xs
 
-data TwoPatternsSameLength = TwoPatternsSameLength Pattern Pattern 
+data TwoPatternsSameLength = TwoPatternsSameLength Pattern Pattern
   deriving Show
 
 sizedTwoPatternsSameLength :: Int -> Gen TwoPatternsSameLength
-sizedTwoPatternsSameLength n = 
+sizedTwoPatternsSameLength n =
   TwoPatternsSameLength <$> sizedArbPattern n <*> sizedArbPattern n
 
 instance Arbitrary TwoPatternsSameLength where
   arbitrary = sized sizedTwoPatternsSameLength
 
-prop_zero_adjustment_is_no_adjustment :: 
+prop_zero_adjustment_is_no_adjustment ::
   Weights -> TwoPatternsSameLength -> Property
 prop_zero_adjustment_is_no_adjustment ws (TwoPatternsSameLength a b) =
   property $ diff ws b b' < aTad
   where b' = makeSimilar a 0 b
         aTad = 1e-10
 
-prop_full_adjustment_gives_perfect_match :: 
+prop_full_adjustment_gives_perfect_match ::
   Weights -> TwoPatternsSameLength -> Property
 prop_full_adjustment_gives_perfect_match
   ws (TwoPatternsSameLength a b) = property $ diff ws b' a < aTad
   where b' = makeSimilar a 1 b
         aTad = 1e-10
 
-prop_makeSimilar_improves_similarity :: 
+prop_makeSimilar_improves_similarity ::
   Weights -> TwoPatternsSameLength -> UIDouble -> Property
 prop_makeSimilar_improves_similarity ws (TwoPatternsSameLength a b) r
   = not (null a) && a /= b ==> d2 < d1
