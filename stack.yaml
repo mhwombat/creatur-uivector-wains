@@ -18,7 +18,7 @@
 #
 # resolver: ./custom-snapshot.yaml
 # resolver: https://example.com/snapshots/2018-01-01.yaml
-resolver: lts-12.7
+resolver: lts-12.16
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
@@ -35,30 +35,20 @@ resolver: lts-12.7
 #  - wai
 packages:
 - .
-- ../creatur
-# - location:
-#     git: git@github.com:mhwombat/creatur.git
-#     commit: master
-#   extra-dep: true
-- ../creatur-wains
-# - location:
-#     git: git@github.com:mhwombat/creatur-wains.git
-#     commit: master
-#   extra-dep: true
-- ../creatur-wains-test-utils
-# - location:
-#     git: git@github.com:mhwombat/creatur-wains-test-utils.git
-#     commit: master
-#   extra-dep: true
-- ../som
 # Dependency packages to be pulled from upstream that are not in the resolver
 # using the same syntax as the packages field.
 # (e.g., acme-missiles-0.3)
 extra-deps:
 - assert-0.0.1.2
+- creatur-5.9.27
 - gray-extended-1.5.2
 - grid-7.8.9
 - numeric-tools-0.2.0.1
+- som-10.0.1
+- git: git@github.com:mhwombat/creatur-wains.git
+  commit: 5e18513682976564cd13a07a642ac8dd5c498068
+- git: https://github.com/mhwombat/creatur-wains-test-utils.git
+  commit: 4c4eabec150c1fa3a6192a6077fa34ed28422c81
 
 # Override default flag values for local packages and extra-deps
 # flags: {}
